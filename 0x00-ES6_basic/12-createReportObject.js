@@ -1,11 +1,10 @@
-}
-rt default function createReportObject(employeesList) {
-  return {
-    allEmployees: {
-      ...employeesList
-    },
-    getNumberOfDepartments: function () {
-      return Object.keys(this.allEmployees).length;
-    }
-  };
+{
+  allEmployees: {
+    departmentName1: ['employee1', 'employee2', ...],
+    departmentName2: ['employee3', 'employee4', ...],
+    // ... (more departments)
+  },
+  getNumberOfDepartments(employeesList) {
+    // Implementation to count the number of departments
+  },
 }
