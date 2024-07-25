@@ -1,44 +1,42 @@
-// 7-airport.js
 export default class Airport {
   constructor(name, code) {
-    this._validateName(name);
-    this._validateCode(code);
-
     this._name = name;
     this._code = code;
   }
 
-  // Name validation
-  _validateName(name) {
-    if (typeof name !== 'string') {
-      throw new TypeError('Name must be a string');
-    }
-  }
-
-  // Code validation
-  _validateCode(code) {
-    if (typeof code !== 'string') {
-      throw new TypeError('Code must be a string');
-    }
-  }
-
-  // Getter for name
+  /**
+   * @returns {String} The name of the airport.
+   */
   get name() {
     return this._name;
   }
 
-  // Getter for code
+  /**
+   * @param {String} value - The name of the airport.
+   */
+  set name(value) {
+    this._name = value;
+  }
+
+  /**
+   * @returns {String} The code of the airport.
+   */
   get code() {
     return this._code;
   }
 
-  // Custom toString method
-  toString() {
-    return `[object ${this._code}]`;
+  /**
+   * @param {String} value - The code of the airport.
+   */
+  set code(value) {
+    this._code = value;
   }
 
-  // Optional: To match the example output format
-  toStringVerbose() {
-    return `Airport [${this._code}] { _name: '${this._name}', _code: '${this._code}' }`;
+  /**
+   * Custom toStringTag for the airport object.
+   * @returns {String} The code of the airport.
+   */
+  get [Symbol.toStringTag]() {
+    return this._code;
   }
 }

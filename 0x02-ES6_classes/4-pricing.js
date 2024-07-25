@@ -1,60 +1,66 @@
-// 4-pricing.js
-import Currency from './3-currency.js';
+import Currency from './3-currency';
 
-export default class Pricing {
+class Pricing {
   constructor(amount, currency) {
-    this._validateAmount(amount);
-    this._validateCurrency(currency);
-
     this._amount = amount;
     this._currency = currency;
   }
 
-  // Amount validation
-  _validateAmount(amount) {
+  /**
+   * @param {Number} amount
+   */
+  set amount(amount) {
     if (typeof amount !== 'number') {
-      throw new TypeError('Amount must be a number');
+      throw new TypeError('Amount must be a Number');
     }
+    this._amount = amount;
   }
 
-  // Currency validation
-  _validateCurrency(currency) {
-    if (!(currency instanceof Currency)) {
-      throw new TypeError('Currency must be an instance of the Currency class');
-    }
-  }
-
-  // Getter and setter for amount
   get amount() {
     return this._amount;
   }
 
-  set amount(newAmount) {
-    this._validateAmount(newAmount);
-    this._amount = newAmount;
+  /**
+   * @param {Currency} currency
+   */
+  set currency(currency) {
+    if (currency instanceof Currency) {
+      this._currency = currency;
+    } else {
+      throw new TypeError('currency must be an instance of Currency');
+    }
   }
 
-  // Getter and setter for currency
   get currency() {
     return this._currency;
   }
 
-  set currency(newCurrency) {
-    this._validateCurrency(newCurrency);
-    this._currency = newCurrency;
-  }
-
-  // Method to display full price
+  /**
+   * Displays the full price including the currency information.
+   * @returns {String} The formatted price with currency.
+   */
   displayFullPrice() {
-    return `${this._amount} ${this._currency.name} (${this._currency.code})`;
+    return `${this.amount} ${this.currency.displayFullCurrency()}`;
   }
 
-  // Static method to convert price
+  /**
+   * Converts a price using the given conversion rate.
+   * @param {Number} amount - The amount to convert.
+   * @param {Number} conversionRate - The rate to convert the amount.
+   * @returns {Number} The converted price.
+   */
   static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number' || typeof conversionRate !== 'number') {
-      throw new TypeError('Both amount and conversion rate must be numbers');
+    if (typeof amount !== 'number') {
+      throw new TypeError('amount must be a number');
     }
+
+    if (typeof conversionRate !== 'number') {
+      throw new TypeError('conversionRate must be a number');
+    }
+
     return amount * conversionRate;
   }
 }
+
+export default Pricing;
 
