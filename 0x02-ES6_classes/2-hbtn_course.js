@@ -1,8 +1,8 @@
 class HolbertonCourse {
   constructor(name, length, students) {
-    this._name = name;
-    this._length = length;
-    this._students = students;
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
   /**
@@ -37,10 +37,11 @@ class HolbertonCourse {
    * @param {Array} students
    */
   set students(students) {
-    if (!Array.isArray(students)) {
+    if (students instanceof Array) {
+      this._students = students;
+    } else {
       throw new TypeError('Students must be an Array');
     }
-    this._students = students;
   }
 
   get students() {
@@ -49,4 +50,3 @@ class HolbertonCourse {
 }
 
 export default HolbertonCourse;
-

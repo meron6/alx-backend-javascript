@@ -2,8 +2,8 @@ import Currency from './3-currency';
 
 class Pricing {
   constructor(amount, currency) {
-    this._amount = amount;
-    this._currency = currency;
+    this.amount = amount;
+    this.currency = currency;
   }
 
   /**
@@ -35,19 +35,13 @@ class Pricing {
     return this._currency;
   }
 
-  /**
-   * Displays the full price including the currency information.
-   * @returns {String} The formatted price with currency.
-   */
   displayFullPrice() {
     return `${this.amount} ${this.currency.displayFullCurrency()}`;
   }
 
   /**
-   * Converts a price using the given conversion rate.
-   * @param {Number} amount - The amount to convert.
-   * @param {Number} conversionRate - The rate to convert the amount.
-   * @returns {Number} The converted price.
+   * @param {Number} amount
+   * @param {Number} conversionRate
    */
   static convertPrice(amount, conversionRate) {
     if (typeof amount !== 'number') {
@@ -63,4 +57,3 @@ class Pricing {
 }
 
 export default Pricing;
-
