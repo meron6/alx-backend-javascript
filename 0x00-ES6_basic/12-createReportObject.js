@@ -1,10 +1,8 @@
-{
-  allEmployees: {
-    departmentName1: ['employee1', 'employee2', ...],
-    departmentName2: ['employee3', 'employee4', ...],
-    // ... (more departments)
-  },
-  getNumberOfDepartments(employeesList) {
-    // Implementation to count the number of departments
-  },
+export default function createReportObject(employeesList) {
+  return {
+    allEmployees: { ...employeesList },
+    getNumberOfDepartments(list) {
+      return Object.keys(list).length;
+    },
+  };
 }
