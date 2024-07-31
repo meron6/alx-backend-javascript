@@ -1,0 +1,17 @@
+{
+  "name": "task_3",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^5.0.0",
+    "ts-loader": "^9.0.0",
+    "html-webpack-plugin": "^5.0.0",
+    "clean-webpack-plugin": "^5.0.0"
+  }
+}
