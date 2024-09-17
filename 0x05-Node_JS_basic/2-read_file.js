@@ -2,37 +2,36 @@ const fs = require('fs');
 
 function countStudents(fileName) {
   const students = {};
-  let totalStudents = 0;
-
+  const fields = {};
+  let length = 0;
   try {
-    const data = fs.readFileSync(fileName, 'utf-8').trim();
-    const lines = data.split('\n');
-
-    // If the file has a header, skip the first line
-    if (lines.length > 0 && lines[0].includes('name,age,field')) {
-      lines.shift(); // Remove the header
-    }
-
-    lines.forEach((line) => {
-      if (line) {
-        totalStudents++;
-        const [name, , , field] = line.split(',');
-
-        // Ensure the field exists in the dictionary
-        if (!students[field]) {
-          students[field] = [];
+    const content = fs.readFileSync(fileName, 'utf-8');
+    const lines = content.toString().split('\n');
+    for (let i = 0; i < lines.length; i += 1) {
+      if (lines[i]) {
+        length += 1;
+        const field = lines[i].toString().split(',');
+        if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+          students[field[3]].push(field[0]);
+        } else {
+          students[field[3]] = [field[0]];
         }
-
-        students[field].push(name);
+        if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
+          fields[field[3]] += 1;
+        } else {
+          fields[field[3]] = 1;
+        }
       }
-    });
-
-    console.log(`Number of students: ${totalStudents}`);
-    Object.entries(students).forEach(([field, names]) => {
-      console.log(`Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`);
-    });
+    }
+    const l = length - 1;
+    console.log(`Number of students: ${l}`);
+    for (const [key, value] of Object.entries(fields)) {
+      if (key !== 'field') {
+        console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
+      }
+    }
   } catch (error) {
-    throw new Error('Cannot load the database');
+    throw Error('Cannot load the database');
   }
 }
 
